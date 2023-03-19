@@ -13,7 +13,7 @@ jobs:
         with:
           dotnet-version: 3.1.x
       - name: Configure azure Credentials
-        uses: azure-actions/configure-azure-credentials@v1
+        uses: az-actions/configure-az-credentials@v1
         with:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
