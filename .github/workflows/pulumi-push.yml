@@ -1,0 +1,31 @@
+name: Deploy to Azure using Pulumi
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Pulumi
+      uses: pulumi/action-install-pulumi@v1.3.0
+
+    - name: Configure Pulumi access
+      run: |
+        pulumi login azuread --clientId ${{ secrets.AZURE_CLIENT_ID }} --clientSecret ${{ secrets.AZURE_CLIENT_SECRET }} --tenantId ${{ secrets.AZURE_TENANT_ID }}
+
+    - name: Deploy infrastructure using Pulumi
+      run: |
+        pulumi up
