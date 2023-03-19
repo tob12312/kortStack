@@ -7,7 +7,7 @@ using System.Collections.Generic;
 return await Pulumi.Deployment.RunAsync(() =>
 {
     // Create an Azure Resource Group
-    var resourceGroup = new ResourceGroup("testGroup");
+    var resourceGroup = new ResourceGroup("TESTGROUP2");
 
     // Create an Azure resource (Storage Account)
     var storageAccount = new StorageAccount("sa", new StorageAccountArgs
